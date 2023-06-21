@@ -1,0 +1,121 @@
+### Logistic Regression output:
+
+Call:
+glm(formula = y ~ ., family = "binomial", data = train_data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.9684  -0.3744  -0.2489  -0.1594   3.0101  
+
+Coefficients:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -2.336e+00  6.834e-01  -3.418 0.000631 ***
+age                -8.463e-04  8.011e-03  -0.106 0.915872    
+jobblue-collar     -5.748e-01  2.730e-01  -2.106 0.035238 *  
+jobentrepreneur     1.073e-02  3.985e-01   0.027 0.978527    
+jobhousemaid       -4.195e-01  4.709e-01  -0.891 0.372997    
+jobmanagement      -1.371e-01  2.690e-01  -0.510 0.610199    
+jobretired          5.693e-01  3.513e-01   1.621 0.105093    
+jobself-employed   -1.966e-02  3.864e-01  -0.051 0.959415    
+jobservices        -4.785e-01  3.190e-01  -1.500 0.133626    
+jobstudent          3.132e-01  4.503e-01   0.695 0.486755    
+jobtechnician      -1.941e-01  2.536e-01  -0.765 0.444000    
+jobunemployed      -7.153e-01  4.731e-01  -1.512 0.130544    
+jobunknown         -2.880e-02  7.554e-01  -0.038 0.969582    
+maritalmarried     -3.895e-01  1.955e-01  -1.993 0.046269 *  
+maritalsingle      -2.222e-01  2.302e-01  -0.965 0.334493    
+educationsecondary -3.325e-02  2.264e-01  -0.147 0.883255    
+educationtertiary   1.088e-01  2.612e-01   0.417 0.676932    
+educationunknown   -8.148e-01  4.412e-01  -1.847 0.064793 .  
+defaultyes          3.148e-01  5.041e-01   0.625 0.532277    
+balance            -8.697e-06  1.859e-05  -0.468 0.639952    
+housingyes         -1.706e-01  1.573e-01  -1.085 0.278030    
+loanyes            -5.718e-01  2.199e-01  -2.600 0.009326 ** 
+contacttelephone   -2.460e-01  2.733e-01  -0.900 0.368101    
+contactunknown     -1.322e+00  2.554e-01  -5.177 2.26e-07 ***
+day                 1.498e-02  9.354e-03   1.601 0.109353    
+monthaug           -1.565e-01  2.789e-01  -0.561 0.574590    
+monthdec            6.233e-01  8.192e-01   0.761 0.446714    
+monthfeb            1.819e-01  3.380e-01   0.538 0.590443    
+monthjan           -1.470e+00  4.841e-01  -3.037 0.002392 ** 
+monthjul           -8.795e-01  2.855e-01  -3.081 0.002065 ** 
+monthjun            4.710e-01  3.455e-01   1.363 0.172823    
+monthmar            1.716e+00  4.242e-01   4.045 5.24e-05 ***
+monthmay           -5.186e-01  2.658e-01  -1.951 0.051013 .  
+monthnov           -9.859e-01  3.108e-01  -3.172 0.001512 ** 
+monthoct            1.830e+00  3.744e-01   4.887 1.03e-06 ***
+monthsep            9.601e-01  4.494e-01   2.136 0.032650 *  
+duration            4.238e-03  2.258e-04  18.768  < 2e-16 ***
+campaign           -5.314e-02  3.072e-02  -1.730 0.083689 .  
+pdays              -1.042e-03  1.134e-03  -0.919 0.358212    
+previous           -3.281e-02  4.356e-02  -0.753 0.451346    
+poutcomeother       6.057e-01  3.145e-01   1.926 0.054079 .  
+poutcomesuccess     2.617e+00  3.262e-01   8.023 1.03e-15 ***
+poutcomeunknown    -3.308e-01  3.625e-01  -0.913 0.361501    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2573.2  on 3615  degrees of freedom
+Residual deviance: 1704.5  on 3573  degrees of freedom
+AIC: 1790.5
+
+ ### Confusion matrix
+> confusion_matrix <- table(test_data$y, test_data$predicted)
+> confusion_matrix
+   
+      0   1
+  0 779  19
+  1  71  36
+> ### Accuracy
+> accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+> accuracy
+[1] 0.9005525
+> ### Sensitivity (True Positive Rate)
+> sensitivity <- confusion_matrix[2, 2] / (confusion_matrix[2, 1] + confusion_matrix[2, 2])
+> sensitivity
+[1] 0.3364486
+> ### Specificity (True Negative Rate)
+> specificity <- confusion_matrix[1, 1] / (confusion_matrix[1, 1] + confusion_matrix[1, 2])
+> specificity
+[1] 0.9761905
+
+
+
+### Discriminative analysis Output:
+
+## Linear DA:
+
+$class.table
+        classify
+original   no  yes
+     no  3645  355
+     yes  289  232
+
+$prop
+        classify
+original     no    yes
+     no  0.9112 0.0887
+     yes 0.5547 0.4453
+
+$overall.correct
+[1] 0.8576
+
+## Quadratic DA:
+
+$class.table
+        classify
+original   no  yes
+     no  3645  355
+     yes  289  232
+
+$prop
+        classify
+original     no    yes
+     no  0.9112 0.0887
+     yes 0.5547 0.4453
+
+$overall.correct
+[1] 0.8576
+
