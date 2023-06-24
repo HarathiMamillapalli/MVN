@@ -82,6 +82,75 @@ AIC: 1790.5
 [1] 0.9761905
 
 
+##removing thwe columns which are not significant and performing the 
+##logistic regression
+
+Call:
+glm(formula = y ~ ., family = "binomial", data = train_data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-4.0604  -0.3793  -0.2590  -0.1680   2.9802  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      -3.1452394  0.4382902  -7.176 7.17e-13 ***
+age               0.0091195  0.0064425   1.416  0.15692    
+maritalmarried   -0.4418050  0.1917151  -2.304  0.02120 *  
+maritalsingle    -0.1269168  0.2238770  -0.567  0.57078    
+loanyes          -0.6021741  0.2169619  -2.775  0.00551 ** 
+contacttelephone -0.2015602  0.2639539  -0.764  0.44509    
+contactunknown   -1.3660983  0.2493373  -5.479 4.28e-08 ***
+monthaug         -0.0459650  0.2588596  -0.178  0.85906    
+monthdec          0.6527731  0.7926723   0.824  0.41022    
+monthfeb          0.0510352  0.3122045   0.163  0.87015    
+monthjan         -1.1475835  0.4610412  -2.489  0.01281 *  
+monthjul         -0.7895922  0.2792156  -2.828  0.00469 ** 
+monthjun          0.4275564  0.3234827   1.322  0.18626    
+monthmar          1.8624816  0.4062945   4.584 4.56e-06 ***
+monthmay         -0.6170290  0.2575751  -2.396  0.01660 *  
+monthnov         -0.8742617  0.3032227  -2.883  0.00394 ** 
+monthoct          1.9222022  0.3587755   5.358 8.43e-08 ***
+monthsep          1.0837972  0.4321587   2.508  0.01215 *  
+duration          0.0041291  0.0002189  18.866  < 2e-16 ***
+campaign         -0.0486875  0.0296872  -1.640  0.10100    
+poutcomeother     0.6206827  0.3071360   2.021  0.04329 *  
+poutcomesuccess   2.6671646  0.3114667   8.563  < 2e-16 ***
+poutcomeunknown   0.0463503  0.2070693   0.224  0.82288    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2573.2  on 3615  degrees of freedom
+Residual deviance: 1738.4  on 3593  degrees of freedom
+AIC: 1784.4
+
+
+# Confusion matrix
+> confusion_matrix <- table(test_data$y, test_data$predicted)
+> confusion_matrix
+   
+      0   1
+  0 779  19
+  1  76  31
+
+> # Accuracy
+> accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+> accuracy
+[1] 0.8950276
+
+> # Sensitivity (True Positive Rate)
+> sensitivity <- confusion_matrix[2, 2] / (confusion_matrix[2, 1] + confusion_matrix[2, 2])
+> sensitivity
+[1] 0.2897196
+
+> # Specificity (True Negative Rate)
+> specificity <- confusion_matrix[1, 1] / (confusion_matrix[1, 1] + confusion_matrix[1, 2])
+> specificity
+[1] 0.9761905
+>
+
 
 ### Discriminative analysis Output:
 
@@ -118,4 +187,5 @@ original     no    yes
 
 $overall.correct
 [1] 0.8576
+
 
